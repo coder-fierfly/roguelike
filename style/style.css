@@ -37,6 +37,7 @@ h1 {
 }
 
 .field .tile {
+    position: relative;
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -70,26 +71,59 @@ h1 {
     z-index: 9;
 }
 
-.field .tile .health {
-    z-index: 11;
+.health-container {
     position: absolute;
-    left: 0;
-    top: 0;
-    height: 3px;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 20%;
+    background-color: #ccc;
 }
 
-.inventory-box {
-    border: 2px solid #d0d0d0;
-    float: left;
-}
-
-.inventory {
-    position: relative;
-    width: 800px;
-    height: 32px;
+.health-bar {
+    height: 100%;
+    width: 80%;
+    background-color: green;
+    transition: width 0.2s;
 }
 
 .cl {
     clear: both;
     display: block;
+}
+
+.modal {
+    display: none; /* Окно скрыто по умолчанию */
+    position: fixed;
+    z-index: 1000; /* На самом верху */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #686868;
 }

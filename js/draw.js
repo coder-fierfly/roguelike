@@ -1,17 +1,16 @@
-// Функция для отрисовки карты в DOM
 function drawMap() {
+    console.log('drawMap')
     var field = $('.field');
     field.empty();
 
-    for (var y = 0; y < mapHeight; y++) {
-        for (var x = 0; x < mapWidth; x++) {
+    for (var y = 0; y < MAP_HEIGHT; y++) {
+        for (var x = 0; x < MAP_WIDTH; x++) {
             var tileClass = '';
             switch (map[y][x]) {
                 case TILE_WALL:
                     tileClass = 'tileW';
                     break;
                 case TILE_FLOOR:
-                case TILE_ROOM:
                     tileClass = 'tileF';
                     break;
                 case TILE_HERO:
@@ -29,7 +28,34 @@ function drawMap() {
             }
 
             var tile = $('<div></div>').addClass('tile ' + tileClass);
+
+            if (map[y][x] === TILE_HERO) {
+                addStatsElement(tile, heroData.health, HERO_MAX_HEALTH);
+            } else if (map[y][x] === TILE_ENEMY) {
+
+                var enemy = enemiesData.find(function (e) {
+                    return e.x === x && e.y === y;
+                });
+                if (enemy) {
+                    addStatsElement(tile, enemy.health, ENEMY_MAX_HEALTH);
+                }
+            }
+
             field.append(tile);
         }
     }
+}
+
+// Функция для добавления элементов здоровья и силы атаки
+function addStatsElement(tile, health, maxHealth) {
+
+    var healthContainer = $('<div></div>').addClass('health-container');
+
+    var healthBar = $('<div></div>').addClass('health-bar');
+
+    var healthPercent = (health / maxHealth) * 100;
+
+    healthBar.css('width', healthPercent + '%');
+    healthContainer.append(healthBar);
+    tile.append(healthContainer);
 }

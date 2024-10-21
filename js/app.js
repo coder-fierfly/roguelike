@@ -1,18 +1,12 @@
-var TILE_WALL = 'W';
-var TILE_FLOOR = 'F';
-var TILE_ROOM = 'R';
-var TILE_HERO = 'H';
-var TILE_ENEMY = 'E';
-var TILE_WEAPON = 'S';
-var TILE_POTION = 'P';
-
-var mapWidth = 40;
-var mapHeight = 24;
+'use strict'
 var map = [];
+var isGameOver = false;
 
 function getRandom(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+// TODO враги если друг на друга наступают оставляют свой след вместо плитки
 
 
 
@@ -31,4 +25,6 @@ function initGame() {
 // Запуск игры
 $(document).ready(function () {
     initGame();
+    startEnemyMovement();
+    startEnemyAttackCheck();
 });
