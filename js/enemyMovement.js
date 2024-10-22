@@ -2,7 +2,7 @@ function startEnemyMovement() {
     setInterval(function () {
         if (!isGameOver) {
             moveEnemies();
-            drawMap();
+            drawEnemies();
         }
     }, ENEMY_MOVEMENT_INTERVAL);
 }
@@ -15,9 +15,10 @@ function moveEnemies() {
         }
         return calculateNewPosition(enemy);
     });
-    // TODO подумать почему враги сливаются
-    map = updateMap(newPositions);
+
+    updateMap(newPositions);
 }
+
 
 function getOppositeDirection(direction) {
     return {
@@ -42,28 +43,25 @@ function calculateNewPosition(enemy) {
 }
 
 function updateMap(newPositions) {
-    var tempMap = JSON.parse(JSON.stringify(map));
+    cleanMap();
 
     enemiesData.forEach(function (enemy, index) {
-        var newPosition = newPositions[index];
-        if (!newPosition) {
-            return;
-        }
-        var newX = newPosition.newX;
-        var newY = newPosition.newY;
-
-        tempMap[enemy.y][enemy.x] = enemy.lastTile;
-
-        if (map[newY][newX] !== TILE_HERO && map[newY][newX] !== TILE_ENEMY) {
-            enemy.lastTile = map[newY][newX];
-        }
-
-        tempMap[newY][newX] = TILE_ENEMY;
-
+        var newX = newPositions[index].newX;
+        var newY = newPositions[index].newY;
+        mapEnemies[newY][newX] = TILE_ENEMY;
         enemy.x = newX;
         enemy.y = newY;
     });
-    return tempMap;
+}
+
+function cleanMap() {
+    for (var y = 0; y < MAP_HEIGHT; y++) {
+        for (var x = 0; x < MAP_WIDTH; x++) {
+            if (mapEnemies[y][x] === TILE_ENEMY) {
+                mapEnemies[y][x] = TILE_EMPTY;
+            }
+        }
+    }
 }
 
 

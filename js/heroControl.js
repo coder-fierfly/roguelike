@@ -20,12 +20,12 @@ $(document).on('keyup', function(event) {
             newX += 1;
             break;
         default:
-            return;  // Выходим, если была нажата неизвестная клавиша
+            return;
     }
 
     if (isValidMove(newX, newY)) {
         moveHero(newX, newY);
-        drawMap();
+        drawBackground();
     }
 });
 
@@ -53,10 +53,10 @@ function isEnemyOnTile(x, y) {
 // Проверка на меч или зелье на новой клетке
 function checkBuffOrHealth(x, y){
     if (map[y][x] === TILE_WEAPON) {
-        heroData.attack += 25;
+        heroData.attack += WEAPON_IMPROVEMENTS;
         map[y][x] = TILE_FLOOR;
     } else if (map[y][x] === TILE_POTION) {
-        heroData.health += 20;
+        heroData.health += POTION_IMPROVEMENTS;
         if (heroData.health > HERO_MAX_HEALTH) {
             heroData.health = HERO_MAX_HEALTH;
         }

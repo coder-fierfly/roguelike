@@ -13,7 +13,7 @@
     <script src="./js/constants.js"></script>
     <script src="./js/map.js"></script>
     <script src="./js/objects.js"></script>
-    <script src="./js/draw.js"></script>
+    <script src="js/drawMap.js"></script>
     <script src="./js/heroControl.js"></script>
     <script src="./js/heroAttack.js"></script>
     <script src="js/enemyMovement.js"></script>
@@ -26,11 +26,14 @@
 <body>
 <h1>Игровое поле</h1>
 <div class="field-box">
-    <div class="field"></div>
+    <div class="field-wrapper">
+        <div class="field field-background"></div>
+        <div class="field field-enemies"></div>
+    </div>
 </div>
 <div id="game-over-modal" class="modal">
     <div class="modal-content">
-        <h2 id="modal-header">Вы погибли</h2>
+        <h3 id="modal-header">Вы погибли</h3>
         <p id="modal-message">Хотите попробовать еще раз?</p>
         <button id="retry-button">Да!</button>
     </div>

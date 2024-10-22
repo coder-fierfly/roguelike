@@ -13,7 +13,6 @@ function restartGame() {
     startEnemyAttackCheck();
 }
 
-// Остановка всех процессов игры
 function stopGame() {
     isGameOver = true;
 }

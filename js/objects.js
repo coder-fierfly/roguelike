@@ -6,15 +6,18 @@ function placeHero() {
 }
 
 function placeEnemies() {
-    enemiesData = placeItem(TILE_ENEMY, 10);
+    enemiesData = placeItem(TILE_ENEMY, MAX_COUNT_ENEMIES);
+    enemiesData.forEach(function (enemy) {
+        mapEnemies[enemy.y][enemy.x] = TILE_ENEMY;
+    });
 }
 
 function placeWeapons() {
-    placeItem(TILE_WEAPON, 2);
+    placeItem(TILE_WEAPON, COUNT_WEAPONS);
 }
 
 function placePotions() {
-    placeItem(TILE_POTION, 10);
+    placeItem(TILE_POTION, MAX_COUNT_POTIONS);
 }
 
 // Размещение предметов, героя и противников
@@ -29,7 +32,10 @@ function placeItem(type, count) {
             var y = getRandom(0, MAP_HEIGHT - 1);
 
             if (map[y][x] === TILE_FLOOR) {
-                map[y][x] = type;
+
+                if (type !== TILE_ENEMY) {
+                    map[y][x] = type;
+                }
                 placed = true;
 
                 if (type === TILE_ENEMY) {
@@ -38,8 +44,7 @@ function placeItem(type, count) {
                         y: y,
                         health: ENEMY_MAX_HEALTH,
                         attack: ENEMY_BASE_ATTACK,
-                        direction: getValidDirections(x, y),
-                        lastTile: TILE_FLOOR
+                        direction: getValidDirections(x, y)
                     });
                 } else if (type === TILE_HERO) {
                     positions.push({x: x, y: y, health: HERO_MAX_HEALTH, attack: HERO_BASE_ATTACK});
@@ -51,6 +56,7 @@ function placeItem(type, count) {
     }
     return positions;
 }
+
 
 function getValidDirections(x, y) {
     var directions = [

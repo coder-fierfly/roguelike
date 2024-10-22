@@ -20,7 +20,7 @@ function attackEnemiesAround(heroX, heroY) {
             enemy.health -= heroData.attack;
 
             if (enemy.health <= 0) {
-                map[enemy.y][enemy.x] = TILE_FLOOR;
+                mapEnemies[enemy.y][enemy.x] = TILE_EMPTY;
                 enemiesData = enemiesData.filter(function(e) {
                     return e !== enemy;
                 });

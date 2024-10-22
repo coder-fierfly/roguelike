@@ -8,7 +8,16 @@ function initMap() {
     }
 }
 
-// Создание и размещение комнат
+function initMapEnemies() {
+    mapEnemies = [];
+    for (var y = 0; y < MAP_HEIGHT; y++) {
+        mapEnemies[y] = [];
+        for (var x = 0; x < MAP_WIDTH; x++) {
+            mapEnemies[y][x] = TILE_EMPTY;
+        }
+    }
+}
+
 function placeRooms() {
     var rooms = [];
     var roomCount = getRandom(5, 10);
@@ -17,7 +26,6 @@ function placeRooms() {
     }
 }
 
-// Генерация комнат
 function createRoom(rooms) {
     var roomWidth, roomHeight, roomX, roomY;
     var overlap = false;
@@ -54,7 +62,6 @@ function isRoomOverlap(x1, y1, w1, h1, rooms) {
         var y2 = existingRoom.y;
         var w2 = existingRoom.width;
         var h2 = existingRoom.height;
-        console.log('existingRoom', existingRoom)
         if (!(x1 + w1 < x2 ||  // Левая сторона первой комнаты за правой стороной второй
             x2 + w2 < x1 ||  // Левая сторона второй комнаты за правой стороной левой
             y1 + h1 < y2 ||  // Верх первой комнаты за низом второй
@@ -65,7 +72,6 @@ function isRoomOverlap(x1, y1, w1, h1, rooms) {
     return false;
 }
 
-// Функция для проверки, примыкает ли комната к дороге/комнате
 function isInTouchRoad(roomX, roomY, roomWidth, roomHeight) {
     for (var x = roomX; x < roomX + roomWidth; x++) {
         if (roomY - 1 >= 0 && map[roomY - 1][x] === TILE_FLOOR) return true;
@@ -96,7 +102,6 @@ function generateRoads(count, size, createRoad) {
     }
 }
 
-// Генерация дорог
 function createRoadX(x) {
     for (var y = 0; y < MAP_HEIGHT; y++) {
         map[y][x] = TILE_FLOOR;
