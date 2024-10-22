@@ -7,9 +7,6 @@ function placeHero() {
 
 function placeEnemies() {
     enemiesData = placeItem(TILE_ENEMY, MAX_COUNT_ENEMIES);
-    enemiesData.forEach(function (enemy) {
-        mapEnemies[enemy.y][enemy.x] = TILE_ENEMY;
-    });
 }
 
 function placeWeapons() {

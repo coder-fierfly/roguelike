@@ -1,7 +1,6 @@
 'use strict'
 
 var map = [];
-var mapEnemies = [];
 var isGameOver = false;
 
 function getRandom(min, max) {
@@ -10,7 +9,6 @@ function getRandom(min, max) {
 
 function initGame() {
     initMap();
-    initMapEnemies();
     placeRoad();
     placeRooms();
     placeHero();

@@ -8,16 +8,6 @@ function initMap() {
     }
 }
 
-function initMapEnemies() {
-    mapEnemies = [];
-    for (var y = 0; y < MAP_HEIGHT; y++) {
-        mapEnemies[y] = [];
-        for (var x = 0; x < MAP_WIDTH; x++) {
-            mapEnemies[y][x] = TILE_EMPTY;
-        }
-    }
-}
-
 function placeRooms() {
     var rooms = [];
     var roomCount = getRandom(5, 10);

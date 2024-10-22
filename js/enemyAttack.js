@@ -22,11 +22,18 @@ function checkEnemyAttack() {
 
 function attackOnHero(enemy) {
     heroData.health -= enemy.attack;
-
+    updateHeroHealthBar();
     if (heroData.health <= 0) {
-        heroData.health = 0;
         showModal('Вы погибли', 'Хотите попробовать еще раз?');
         stopGame();
         isGameOver = true;
     }
+}
+
+function updateHeroHealthBar() {
+    var heroTile = document.querySelector('.H');
+    var healthBar = heroTile.querySelector('.health-bar');
+
+    var healthPercent = (heroData.health / HERO_MAX_HEALTH) * 100;
+    healthBar.style.width = healthPercent + '%';
 }

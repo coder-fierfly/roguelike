@@ -8,7 +8,6 @@ function startEnemyMovement() {
 }
 
 function moveEnemies() {
-
     var newPositions = enemiesData.map(function (enemy) {
         if (isHeroNearby(enemy.x, enemy.y)) {
             return {newX: enemy.x, newY: enemy.y};
@@ -43,25 +42,12 @@ function calculateNewPosition(enemy) {
 }
 
 function updateMap(newPositions) {
-    cleanMap();
-
     enemiesData.forEach(function (enemy, index) {
         var newX = newPositions[index].newX;
         var newY = newPositions[index].newY;
-        mapEnemies[newY][newX] = TILE_ENEMY;
         enemy.x = newX;
         enemy.y = newY;
     });
-}
-
-function cleanMap() {
-    for (var y = 0; y < MAP_HEIGHT; y++) {
-        for (var x = 0; x < MAP_WIDTH; x++) {
-            if (mapEnemies[y][x] === TILE_ENEMY) {
-                mapEnemies[y][x] = TILE_EMPTY;
-            }
-        }
-    }
 }
 
 

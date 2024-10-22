@@ -27,13 +27,19 @@ function drawEnemies() {
 
     for (var y = 0; y < MAP_HEIGHT; y++) {
         for (var x = 0; x < MAP_WIDTH; x++) {
-            var tile  = $('<div></div>').addClass('tile ' + mapEnemies[y][x]);
-            if (mapEnemies[y][x] === TILE_ENEMY) {
-                var enemy = enemiesData.find(function (e) {
-                    return e.x === x && e.y === y;
-                });
+            var tile = $('<div></div>').addClass('tile');
+
+            var enemy = enemiesData.find(function(e) {
+                return e.x === x && e.y === y;
+            });
+
+            if (enemy) {
+                tile.addClass(TILE_ENEMY);
                 addStatsElement(tile, enemy.health, ENEMY_MAX_HEALTH);
+            } else {
+                tile.addClass(TILE_EMPTY);
             }
+
             fieldEnemies.append(tile);
         }
     }
